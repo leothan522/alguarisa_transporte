@@ -7,10 +7,10 @@
         <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden mr-2" icon="bars-2" inset="left" />
 
-            <x-app-logo href="{{ route('web.home') }}" wire:navigate />
+            <x-app-logo href="{{ route('filament.dashboard.pages.dashboard') }}" />
 
             <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="layout-grid" :href="route('web.home')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:navbar.item icon="layout-grid" :href="route('filament.dashboard.pages.dashboard')" :current="request()->routeIs('dashboard')" >
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
             </flux:navbar>

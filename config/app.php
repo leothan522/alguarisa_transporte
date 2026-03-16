@@ -132,7 +132,7 @@ return [
 
     'register' => env('REGISTER', true),
     'root_user' => env('ROOT_USER', 'Administrador'),
-    'root_email' => env('ROOT_EMAIL', 'admin@localhost.com'),
+    'root_email' => env('ROOT_EMAIL', 'admin@alguarisa.com'),
     'rootpassword' => env('ROOT_PASSWORD', 'admin1234'),
     'ver_filament_widget' => env('VER_FILAMENT_WIDGET', false),
 

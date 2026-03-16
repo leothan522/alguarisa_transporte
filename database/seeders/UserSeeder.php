@@ -21,5 +21,13 @@ class UserSeeder extends Seeder
             'email' => config('app.root_email'),
             'password' => Hash::make(config('app.rootpassword'))
         ]);
+
+        if (!User::where('email', 'admin@alguarisa.com')->exists()){
+            User::factory()->create([
+                'name' => 'Administrador',
+                'email' => "admin@alguarisa.com",
+                'password' => Hash::make('admin1234')
+            ]);
+        }
     }
 }

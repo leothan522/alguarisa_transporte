@@ -6,6 +6,7 @@ use App\Filament\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Actions;
+use Filament\Support\Enums\Width;
 
 
 class ListUsers extends ListRecords
@@ -18,7 +19,7 @@ class ListUsers extends ListRecords
             Actions\CreateAction::make()
                 ->label('Crear Usuario')
                 ->modalHeading('Crear Usuario')
-                ->modalWidth('lg')
+                ->modalWidth(Width::ThreeExtraLarge)
                 ->createAnother(false)
         ];
     }

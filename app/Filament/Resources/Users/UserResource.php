@@ -28,7 +28,7 @@ class UserResource extends Resource
         return __('User');
     }
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -54,7 +54,7 @@ class UserResource extends Resource
         return [
             'index' => ListUsers::route('/'),
             /*'create' => CreateUser::route('/create'),*/
-            'edit' => EditUser::route('/{record}/edit'),
+           /* 'edit' => EditUser::route('/{record}/edit'),*/
         ];
     }
 }

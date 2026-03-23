@@ -16,18 +16,20 @@ class UserSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => config('app.root_user'),
             'email' => config('app.root_email'),
             'password' => Hash::make(config('app.rootpassword'))
         ]);
 
         if (!User::where('email', 'admin@alguarisa.com')->exists()){
-            User::factory()->create([
+            $user = User::factory()->create([
                 'name' => 'Administrador',
                 'email' => "admin@alguarisa.com",
                 'password' => Hash::make('admin1234')
             ]);
         }
+
+        $user->assignRole('admin');
     }
 }

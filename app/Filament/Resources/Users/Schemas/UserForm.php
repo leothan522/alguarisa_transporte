@@ -28,7 +28,9 @@ class UserForm
                         /*DateTimePicker::make('email_verified_at'),*/
                         TextInput::make('password')
                             ->label(__('Password'))
+                            ->hiddenOn('edit')
                             ->password()
+                            ->revealable()
                             ->required(),
                         /*Textarea::make('two_factor_secret')
                             ->columnSpanFull(),

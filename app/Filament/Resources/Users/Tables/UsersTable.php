@@ -26,20 +26,28 @@ class UsersTable
             ->columns([
                 TextColumn::make('name')
                     ->label(__('Name'))
-                    ->searchable(),
+                    ->searchable()
+                    ->visibleFrom('md'),
                 TextColumn::make('email')
                     ->label(__('Email'))
-                    ->searchable(),
+                    ->searchable()
+                    ->visibleFrom('md'),
+                TextColumn::make('created_at')
+                    ->label(__('Created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->visibleFrom('md'),
+                TextColumn::make('vista_movil')
+                    ->label(__('Users'))
+                    ->getStateUsing(fn ($record) => $record->name )
+                    ->description(fn ($record) => $record->email )
+                    ->hiddenFrom('md')
                 /*TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),*/
                /* TextColumn::make('two_factor_confirmed_at')
                     ->dateTime()
                     ->sortable(),*/
-                TextColumn::make('created_at')
-                    ->label(__('Created'))
-                    ->dateTime()
-                    ->sortable(),
                 /*TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

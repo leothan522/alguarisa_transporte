@@ -2,19 +2,23 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,26 +44,21 @@ class UsersTable
                     ->label(__('Users'))
                     ->getStateUsing(fn ($record) => $record->name )
                     ->description(fn ($record) => $record->email )
-                    ->hiddenFrom('md')
-                /*TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),*/
-               /* TextColumn::make('two_factor_confirmed_at')
-                    ->dateTime()
-                    ->sortable(),*/
-                /*TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),*/
+                    ->hiddenFrom('md'),
+                IconColumn::make('deleted_at')
+                    ->label('Estatus')
+                    ->boolean()
+                    ->state(fn (User $record): bool => empty($record->deleted_at))
+                    ->alignCenter()
             ])
 
             ->filters([
-                //
+                TrashedFilter::make()
             ])
             ->recordActions([
-               /* EditAction::make(),*/
                 ActionGroup::make([
                     Action::make('Restablecer Contraseña')
+                        ->authorize('update')
                         ->schema([
                             TextInput::make('password')
                                 ->label(__('New password'))
@@ -79,6 +78,7 @@ class UsersTable
                         ->modalWidth(Width::ExtraSmall),
                     EditAction::make(),
                     DeleteAction::make(),
+                    RestoreAction::make(),
 
 
                 ]),
@@ -86,7 +86,8 @@ class UsersTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->authorizeIndividualRecords('delete'),
                 ]),
             ]);
     }

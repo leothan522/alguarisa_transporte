@@ -22,6 +22,7 @@ class UserForm
                             ->label(__('Name'))
                             ->required(),
                         TextInput::make('email')
+                            ->unique()
                             ->label(__('Email'))
                             ->email()
                             ->required(),
@@ -31,7 +32,8 @@ class UserForm
                             ->hiddenOn('edit')
                             ->password()
                             ->revealable()
-                            ->required(),
+                            ->required()
+                            ->minValue(8),
                         /*Textarea::make('two_factor_secret')
                             ->columnSpanFull(),
                         Textarea::make('two_factor_recovery_codes')

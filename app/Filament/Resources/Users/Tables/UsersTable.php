@@ -34,8 +34,7 @@ class UsersTable
                     ->visibleFrom('md'),
                 TextColumn::make('created_at')
                     ->label(__('Created'))
-                    ->dateTime()
-                    ->sortable()
+                    ->date()
                     ->visibleFrom('md'),
                 TextColumn::make('vista_movil')
                     ->label(__('Users'))
